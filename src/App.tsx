@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Stack } from "@mui/material";
+import { AppBar, Box, Container, Stack } from "@mui/material";
 import QuestionsContainer from "./components/Questions/Container";
 import Chart from "./components/Chart";
 import DatePicker from "./components/DatePicker";
@@ -7,11 +7,9 @@ import DatePicker from "./components/DatePicker";
 const App = () => {
   return (
     <Stack>
-      <header>
-        <Container>
-          <h1>Ребус</h1>
-        </Container>
-      </header>
+      <AppBar position="static">
+        <Box sx={{ fontSize: 25, fontWeight: 700 }}>Ребус</Box>
+      </AppBar>
       <Box>
         <Container>
           <Stack>
