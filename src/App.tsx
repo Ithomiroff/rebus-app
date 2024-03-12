@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Box, Container, Stack } from "@mui/material";
 import QuestionsContainer from "./components/Questions/Container";
 import Chart from "./components/Chart";
-import DatePicker from "./components/DatePicker";
+import Picker from "./components/DatePicker";
 
 const App = () => {
   return (
@@ -10,10 +10,10 @@ const App = () => {
       <AppBar position="static">
         <Box sx={{ fontSize: 25, fontWeight: 700 }}>Ребус</Box>
       </AppBar>
-      <Box>
+      <Box sx={{ marginTop: 20 }}>
         <Container>
           <Stack>
-            <DatePicker />
+            <Picker />
             <Chart />
             <QuestionsContainer />
           </Stack>
