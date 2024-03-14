@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Box, Container, Stack } from "@mui/material";
 import QuestionsContainer from "./components/Questions/Container";
-import Chart from "./components/Chart";
+import ChartLine from "./components/Chart";
 import Picker from "./components/DatePicker";
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
         <Container>
           <Stack>
             <Picker />
-            <Chart />
+            <ChartLine />
             <QuestionsContainer />
           </Stack>
         </Container>
