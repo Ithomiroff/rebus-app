@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './config/fonts';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import rebusTheme from "./config/theme";
+import '@fontsource-variable/inter';
+import './main.scss';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,9 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={rebusTheme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <App />
   </React.StrictMode>
 );

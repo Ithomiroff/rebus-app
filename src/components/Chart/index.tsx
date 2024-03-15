@@ -1,5 +1,4 @@
-import { Box } from "@mui/material";
-import React, { useCallback, useRef } from "react";
+import React, { useCallback } from "react";
 import { CategoryScale, Chart, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from "chart.js";
 
 import { Chart as ChartJS } from 'chart.js/auto';
@@ -56,9 +55,11 @@ const ChartLine = () => {
   }, []);
 
   return (
-    <Box sx={{ padding: 11.5, backgroundColor: "#252525", borderRadius: 7, marginTop: 8 }}>
-      <canvas ref={initRef}></canvas>
-    </Box>
+    <div className="chart">
+      <div className="chart-card">
+        <canvas ref={initRef}></canvas>
+      </div>
+    </div>
   );
 };
 

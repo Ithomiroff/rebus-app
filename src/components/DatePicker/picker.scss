@@ -1,0 +1,115 @@
+
+.picker {
+  display: inline-flex;
+  position: relative;
+
+  .react-datepicker {
+    position: absolute;
+    left: 0;
+    top: 56px;
+    background: var(--bg-invert);
+    border: none;
+    border-radius: 18px;
+    padding: 22px 28px;
+
+    display: flex;
+    &__header {
+      background: var(--bg-invert);
+      padding: 0;
+      border: none;
+    }
+    &__month {
+      margin: 0;
+      &-container {
+        float: unset;
+        margin-right: 22px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    &__triangle {
+      display: none;
+    }
+    &__current-month {
+      color: var(--mid-gray);
+      font-size: 18px;
+      font-weight: 600;
+    }
+    &__day-name {
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0;
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+    }
+    &__day-names {
+      margin-bottom: 0;
+    }
+    &__day {
+      color: var(--light);
+      font-size: 18px;
+      border-radius: 0;
+      margin: 0;
+      height: 46px;
+      width: 46px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      &:hover {
+        background-color: var(--dark-gray);
+      }
+      &--keyboard-selected {
+        background-color: transparent!important;
+      }
+      &--in-range {
+        background-color: var(--dark-gray)!important;
+      }
+      &--range-start {
+        background-color: var(--accent)!important;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+      }
+      &--range-end {
+        background-color: var(--accent)!important;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+      }
+      &--in-selecting-range {
+        background-color: var(--dark-gray)!important;
+      }
+      &--selecting-range-start {
+        background-color: var(--accent)!important;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+      }
+      &--selecting-range-end {
+        background-color: var(--accent)!important;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+      }
+      &--outside-month {
+        background-color: transparent!important;
+      }
+    }
+    &__week {
+      height: 46px;
+      display: flex;
+      align-items: center;
+    }
+    &__navigation {
+      top: 16px;
+      &--next {
+        right: 28px;
+      }
+      &--previous {
+        left: 28px;
+      }
+    }
+  }
+}
