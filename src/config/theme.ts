@@ -54,6 +54,21 @@ const rebusTheme = createTheme({
           }
         }
       }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          height: '53px',
+          borderRadius: '14px',
+        },
+        input: {
+          paddingTop: '14.5px',
+          paddingBottom: '14.5px',
+        },
+        notchedOutline: {
+          borderColor: 'rgba(89, 89, 89, 0.5)',
+        }
+      }
     }
   }
 });
