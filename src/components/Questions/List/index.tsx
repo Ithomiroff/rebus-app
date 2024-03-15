@@ -1,23 +1,5 @@
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import TimelineIcon from '@mui/icons-material/Timeline';
 import { useState } from "react";
-import { styled, Typography } from "@mui/material";
-
-const Item = styled(ListItem)({
-  '& .chart-icon': {
-    visibility: 'hidden',
-  },
-  '&:hover': {
-    '& .chart-icon': {
-      visibility: 'visible',
-    }
-  }
-});
+import './q-list.scss';
 
 const QuestionsList = () => {
 
@@ -37,48 +19,24 @@ const QuestionsList = () => {
   };
 
   return (
-    <List sx={{ width: '100%', padding: '0!important' }}>
-      {new Array(20).fill(1).map((value) => {
-        return (
-          <Item
-            // @ts-ignore
-            button
-            sx={{ height: '52px', borderRadius: 5, paddingLeft: 5 }}
-            key={value}
-            disablePadding
-            secondaryAction={
-              <Typography variant="body1">
-                221
-              </Typography>
-            }
-          >
-            <ListItemIcon className="chart-icon" sx={{ minWidth: 'unset', marginRight: 4 }}>
-              <IconButton size="small">
-                <TimelineIcon fontSize="small" />
-              </IconButton>
-            </ListItemIcon>
-            <ListItemIcon sx={{ minWidth: 'unset', marginRight: 4 }}>
-              <Checkbox
-                edge="start"
-                checked={checked.indexOf(value) !== -1}
-                tabIndex={-1}
-              />
-            </ListItemIcon>
-            <ListItemText
-              sx={{
-                fontSize: '19px',
-                margin: 0,
-                textDecoration: 'underline',
-                textDecorationStyle: 'dotted',
-                textUnderlineOffset: 4,
-                cursor: 'pointer'
-            }}
-              primary="Когда доставят заказ?"
-            />
-          </Item>
-        );
-      })}
-    </List>
+    <ul className="q-list">
+      {new Array(16).fill(1).map((item) => (
+        <li className="q-list__item" key={item}>
+          <div className="q-list__item__icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.561496 0.000102157C0.410847 0.00293928 0.267396 0.0650475 0.162277 0.172947C0.0571578 0.280846 -0.00114681 0.42583 1.70968e-05 0.576431V15.425C-0.000558552 15.5763 0.0588887 15.7217 0.16534 15.8294C0.271792 15.937 0.416572 15.998 0.567974 15.9992H15.4277C15.5795 15.9992 15.7251 15.9389 15.8324 15.8316C15.9397 15.7244 16 15.5789 16 15.4272C16 15.2755 15.9397 15.13 15.8324 15.0227C15.7251 14.9154 15.5795 14.8551 15.4277 14.8551H1.14241V0.576431C1.143 0.500034 1.12827 0.424293 1.0991 0.353678C1.06992 0.283063 1.02689 0.219005 0.972544 0.165285C0.918196 0.111565 0.853632 0.069272 0.782662 0.0409015C0.711693 0.0125311 0.637917 -0.00134162 0.561496 0.000102157ZM15.4148 3.71278C15.2671 3.71774 15.127 3.77962 15.0239 3.88547L9.16076 9.74589L6.70321 7.04772C6.60097 6.93659 6.45891 6.87037 6.30802 6.86349C6.15713 6.85662 6.00964 6.90965 5.8977 7.01103L2.47052 10.1495C2.41104 10.1991 2.36225 10.2602 2.3271 10.3292C2.29194 10.3982 2.27116 10.4736 2.26601 10.5508C2.26086 10.6281 2.27145 10.7055 2.29713 10.7786C2.32281 10.8516 2.36306 10.9186 2.41543 10.9757C2.4678 11.0327 2.53121 11.0785 2.60181 11.1103C2.67241 11.1421 2.74874 11.1593 2.82617 11.1608C2.9036 11.1622 2.98053 11.148 3.05228 11.1189C3.12404 11.0897 3.18914 11.0464 3.24364 10.9914L6.24971 8.24139L8.71589 10.9568C8.76785 11.0141 8.83087 11.0602 8.90115 11.0924C8.97144 11.1247 9.04753 11.1423 9.12483 11.1443C9.20213 11.1464 9.27904 11.1327 9.35091 11.1042C9.42278 11.0757 9.48812 11.0329 9.543 10.9784L15.8272 4.69276C15.9084 4.61224 15.9635 4.50928 15.9856 4.39714C16.0076 4.28501 15.9955 4.16884 15.9509 4.06362C15.9063 3.9584 15.8312 3.86895 15.7352 3.8068C15.6393 3.74466 15.5269 3.71266 15.4126 3.71494L15.4148 3.71278Z" fill="#908F90"/>
+            </svg>
+          </div>
+
+          <label className="cb-container">
+            <input type="checkbox"/>
+            <span className="cb-container__checkmark"></span>
+          </label>
+
+          <span className="q-list__item__text">Почему не начислены бонусы в день рождения?</span>
+        </li>
+      ))}
+    </ul>
   );
 };
 
