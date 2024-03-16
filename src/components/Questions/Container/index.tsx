@@ -1,4 +1,5 @@
 import QuestionsList from "../List";
+import QuestionsFilter from "../Filter";
 
 const QuestionsContainer = () => {
   return (
@@ -7,6 +8,13 @@ const QuestionsContainer = () => {
         type="text"
         placeholder="Поиск..."
       />
+      <div className="questions-list">
+        <div className="questions-list__header">
+          <QuestionsFilter/>
+          <span>Кол-во</span>
+        </div>
+        <QuestionsList/>
+      </div>
     </div>
   );
 };

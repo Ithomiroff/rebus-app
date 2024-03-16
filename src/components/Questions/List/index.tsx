@@ -28,12 +28,16 @@ const QuestionsList = () => {
             </svg>
           </div>
 
-          <label className="cb-container">
-            <input type="checkbox"/>
-            <span className="cb-container__checkmark"></span>
-          </label>
+          <div className="form-group">
+            <input checked type="checkbox" />
+            <label>
+              <span className="text">Почему не начислены бонусы в день рождения?</span>
+            </label>
+          </div>
 
-          <span className="q-list__item__text">Почему не начислены бонусы в день рождения?</span>
+          <span className="q-list__item__count">
+            200
+          </span>
         </li>
       ))}
     </ul>

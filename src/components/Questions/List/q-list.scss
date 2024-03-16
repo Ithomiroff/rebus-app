@@ -1,69 +1,89 @@
 .q-list {
+  padding: 0;
+  margin: 0;
   &__item {
     display: flex;
     align-items: center;
     list-style: none;
+    height: 52px;
+    border-radius: 10px;
+    padding: 0 35px 0 17px;
+    &:hover {
+      background-color: var(--bg-invert);
+    }
+    &:hover {
+      .q-list__item__icon {
+        visibility: visible;
+      }
+    }
     &__icon {
       cursor: pointer;
       margin-right: 17px;
+      visibility: hidden;
+    }
+    &__count {
+      flex: 2 1;
+      text-align: right;
     }
   }
 }
 
-.cb-container {
+
+.form-group {
   display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+}
+
+.form-group input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
   cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+}
 
-  input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
+.form-group label {
+  position: relative;
+  cursor: pointer;
+}
 
-  &__checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-
-    :after {
-      content: "";
+.form-group {
+  .text {
+    position: relative;
+    &:before {
+      content: '';
       position: absolute;
-      display: none;
-    }
-
-    :after {
-      left: 9px;
-      top: 5px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
+      bottom: 0;
+      width: 100%;
+      border-bottom: 1px dashed var(--alt-gray);
     }
   }
-  &:hover input ~ .cb-container__checkmark {
-    background-color: #ccc;
-  }
-  input:checked ~ .cb-container__checkmark {
-    background-color: #2196F3;
-  }
-  input:checked ~ .cb-container__checkmark:after {
-    display: block;
-  }
+}
 
+.form-group label:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: var(--dark-gray);
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 14px;
+  top: -2px;
+}
+
+.form-group input:checked + label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 7px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--mid-gray);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
