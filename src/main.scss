@@ -75,6 +75,10 @@ button[data-accent] {
   }
 }
 
+button[data-secondary] {
+  background-color: var(--dark-gray);
+}
+
 button[data-icon] {
   border-radius: 50%;
   width: 50px;

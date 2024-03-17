@@ -1,48 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import './q-filter.scss';
-import { setRef } from "@mui/material";
+import { FILTER_VARIANTS } from "../../../config/Mocks";
+import { QuestionBadge } from "../../../config/types";
 
-type Variant = {
-  id: number;
-  count: number;
-  label: string;
-  type: string;
-};
+type Props = {
+  filter: QuestionBadge;
+  onChange: (value: QuestionBadge) => void;
+}
 
-const VARIANTS: Variant[] = [
-  {
-    id: 0,
-    count: 833,
-    label: 'Все вопросы',
-    type: 'all',
-  },
-  {
-    id: 1,
-    count: 790,
-    label: 'Без метки',
-    type: 'empty',
-  },
-  {
-    id: 2,
-    count: 109,
-    label: 'Маркетинг',
-    type: 'marketing',
-  },
-  {
-    id: 3,
-    count: 30,
-    label: 'Логисты',
-    type: 'logists',
-  },
-  {
-    id: 4,
-    count: 3,
-    label: 'Колл-центр',
-    type: 'call',
-  }
-];
-
-const QuestionsFilter = () => {
+const QuestionsFilter = ({ filter, onChange }: Props) => {
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -65,13 +31,15 @@ const QuestionsFilter = () => {
     return () => document.removeEventListener('click', handler);
   }, [open]);
 
+  const activeItem = FILTER_VARIANTS.find((item) => item.type === filter);
+
   return (
     <div className="filter">
       <button
         className={`filter-btn ${open && 'filter-btn--open'}`}
         onClick={() => setOpen(prev => !prev)}
       >
-        <span className="filter-btn__text">Все вопросы <span className="filter-btn__text-inner">(833)</span></span>
+        <span className="filter-btn__text">{activeItem?.label} <span className="filter-btn__text-inner">({activeItem?.count})</span></span>
         <span>
             <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.3346 7.83203L8.00131 12.1654L3.66797 7.83203" stroke="#B4B4B4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -82,10 +50,15 @@ const QuestionsFilter = () => {
         <div className="filter-dd" ref={ref}>
           <span className="filter-dd__title">Метки</span>
           <ul className="filter-dd-variants">
-            {VARIANTS.map((item) => (
+            {FILTER_VARIANTS.map((item) => (
               <li className="filter-dd-variants__item">
-                <div className="form-group">
-                  <input checked type="checkbox" />
+                <div
+                  className="form-group"
+                  onClick={() => onChange(item.type)}
+                >
+                  <input
+                    checked={filter === item.type}
+                    type="checkbox"/>
                   <label className="filter-dd-variants__item__label">
                     <span className="text">
                       {item.label} <span className="text">({item.count})</span>
@@ -96,8 +69,13 @@ const QuestionsFilter = () => {
             ))}
             <span className="divider"></span>
             <li className="filter-dd-variants__item">
-              <div className="form-group">
-                <input checked type="checkbox" />
+              <div
+                className="form-group"
+                onClick={() => onChange('hidden')}
+              >
+                <input
+                  checked={filter === 'hidden'}
+                  type="checkbox" />
                 <label className="filter-dd-variants__item__label">
                   <span className="text">Скрытые (83)</span>
                 </label>
