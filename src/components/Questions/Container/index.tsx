@@ -53,6 +53,7 @@ const QuestionsContainer = ({ list }: { list: Questions[] }) => {
       {selected.length > 0 && (
         <QuestionsActionsPanel
           items={selected}
+          onClose={() => setSelected([])}
         />
       )}
     </div>

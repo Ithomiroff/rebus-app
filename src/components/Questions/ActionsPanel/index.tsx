@@ -5,7 +5,7 @@ import { Questions } from "../../../config/types";
 
 type Actions = 'delete' | 'add' | 'union';
 
-const QuestionsActionsPanel = ({ items }: { items: Questions[] }) => {
+const QuestionsActionsPanel = ({ items, onClose }: { items: Questions[], onClose: () => void }) => {
 
   const [modalTemplate, setModalTemplate] = useState<Actions | null>(null);
 
@@ -101,7 +101,7 @@ const QuestionsActionsPanel = ({ items }: { items: Questions[] }) => {
             </button>
           </li>
           <li>
-            <button data-icon="true">
+            <button data-icon="true" onClick={onClose}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.580712 0.580712C1.08839 0.0730307 1.91151 0.0730307 2.41919 0.580712L7.99995 6.16147L13.5807 0.580712C14.0884 0.0730307 14.9115 0.0730307 15.4192 0.580712C15.9269 1.08839 15.9269 1.91151 15.4192 2.41919L9.83843 7.99995L15.4192 13.5807C15.9269 14.0884 15.9269 14.9115 15.4192 15.4192C14.9115 15.9269 14.0884 15.9269 13.5807 15.4192L7.99995 9.83843L2.41919 15.4192C1.91151 15.9269 1.08839 15.9269 0.580712 15.4192C0.0730307 14.9115 0.0730307 14.0884 0.580712 13.5807L6.16147 7.99995L0.580712 2.41919C0.0730307 1.91151 0.0730307 1.08839 0.580712 0.580712Z" fill="#595859"/>
               </svg>
