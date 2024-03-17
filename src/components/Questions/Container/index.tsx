@@ -1,5 +1,6 @@
 import QuestionsList from "../List";
 import QuestionsFilter from "../Filter";
+import QuestionsActionsPanel from "../ActionsPanel";
 
 const QuestionsContainer = () => {
   return (
@@ -15,6 +16,7 @@ const QuestionsContainer = () => {
         </div>
         <QuestionsList/>
       </div>
+      <QuestionsActionsPanel/>
     </div>
   );
 };

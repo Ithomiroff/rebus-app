@@ -1,0 +1,18 @@
+.actions {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  &-list {
+    background-color: var(--bg-invert);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 10px;
+    li {
+      list-style: none;
+    }
+  }
+}

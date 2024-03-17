@@ -28,7 +28,7 @@ const QuestionsList = () => {
             </svg>
           </div>
 
-          <div className="form-group">
+          <div className="form-group form-group--dashed">
             <input checked type="checkbox" />
             <label>
               <span className="text">Почему не начислены бонусы в день рождения?</span>
