@@ -44,7 +44,7 @@ const LIST_MOCK: Questions[] = [
     id: 2,
     label: 'Почему не начислены бонусы в день рождения?',
     count: 240,
-    badge: 'marketing',
+    badge: 'hidden',
   },
   {
     id: 3,

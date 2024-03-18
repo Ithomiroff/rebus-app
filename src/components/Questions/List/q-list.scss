@@ -25,6 +25,28 @@
       flex: 2 1;
       text-align: right;
     }
+    &--hidden {
+      .q-list__item-text {
+        opacity: 0.3;
+      }
+    }
+  }
+
+  &__modal {
+    width: 536px;
+    color: var(--mid-gray);
+    padding: 0;
+    &-title {
+      color: var(--ver-gray);
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+    &-content {
+      margin-bottom: 27px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 
