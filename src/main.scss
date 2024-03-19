@@ -18,6 +18,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: 'Inter Variable', sans-serif !important;
 }
 
 body {
@@ -64,7 +65,7 @@ button {
   align-items: center;
   gap: 10px;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
   &:hover, &:active {
     background-color: var(--dark-gray);
   }
@@ -80,6 +81,9 @@ button[data-accent] {
 
 button[data-secondary] {
   background-color: var(--dark-gray);
+  &:hover, &:active {
+    background-color: #484848;
+  }
 }
 
 button[data-icon] {
@@ -95,6 +99,9 @@ button[data-icon] {
 button[data-delete] {
   background-color: var(--error);
   color: var(--text-light);
+  &:hover, &:active {
+    background-color: #DC3135;
+  }
 }
 
 .chart {
@@ -125,16 +132,27 @@ input[type="text"] {
   padding-top: 63px;
   max-width: 910px;
   margin: 0 auto;
+  &__input {
+    text-align: right;
+    input {
+      width: 860px;
+    }
+  }
   &-list {
     padding-top: 54px;
     margin-bottom: 90px;
-    min-height: 470px;
+    min-height: 500px;
     &__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 52px;
-      padding: 0 14px 0 17px;
+      padding: 0 10px 0 17px;
+    }
+    &__count {
+      color: var(--mid-gray);
+      font-weight: 600;
+      font-size: 18px;
     }
   }
 }
@@ -168,6 +186,12 @@ input[type="text"] {
         width: 100%;
         border-bottom: 1px dashed var(--alt-gray);
       }
+
+      &:hover {
+        &:before {
+          display: none;
+        }
+      }
     }
   }
 }
@@ -178,7 +202,7 @@ input[type="text"] {
   background-color: var(--dark-gray);
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-  padding: 10px;
+  padding: 13px;
   display: inline-block;
   position: relative;
   vertical-align: middle;
@@ -191,10 +215,10 @@ input[type="text"] {
   content: '';
   display: block;
   position: absolute;
-  top: 2px;
-  left: 7px;
-  width: 5px;
-  height: 9px;
+  top: 0px;
+  left: 9px;
+  width: 6px;
+  height: 13px;
   border: solid var(--mid-gray);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);

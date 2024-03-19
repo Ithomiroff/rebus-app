@@ -1,5 +1,8 @@
 .chart {
   &-card {
-    padding: 40px 20px;
+    padding: 33px;
+    canvas {
+      height: 496px;
+    }
   }
 }

@@ -3,14 +3,14 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 1000px;
+  width: 1030px;
   &-list {
     background-color: var(--bg-invert);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 24px;
     li {
       list-style: none;
     }

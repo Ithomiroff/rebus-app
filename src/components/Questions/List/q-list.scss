@@ -16,6 +16,9 @@
         visibility: visible;
       }
     }
+    &-text {
+      font-size: 19px;
+    }
     &__icon {
       cursor: pointer;
       margin-right: 17px;
@@ -24,6 +27,7 @@
     &__count {
       flex: 2 1;
       text-align: right;
+      font-size: 19px;
     }
     &--hidden {
       .q-list__item-text {
@@ -35,14 +39,17 @@
   &__modal {
     width: 536px;
     color: var(--mid-gray);
-    padding: 0;
+    padding: 0!important;
     &-title {
       color: var(--ver-gray);
       text-transform: uppercase;
       margin-bottom: 15px;
+      font-size: 13px!important;
     }
     &-content {
       margin-bottom: 27px;
+      line-height: 29px;
+      font-size: 18px;
       &:last-child {
         margin-bottom: 0;
       }

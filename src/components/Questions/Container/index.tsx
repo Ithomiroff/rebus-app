@@ -108,19 +108,21 @@ const QuestionsContainer = ({ list, onChange }: Props) => {
 
   return (
     <div className="questions">
-      <input
-        type="text"
-        placeholder="Поиск..."
-        value={filter}
-        onChange={({ target }) => setFilter((target as HTMLInputElement).value)}
-      />
+      <div className="questions__input">
+        <input
+          type="text"
+          placeholder="Поиск..."
+          value={filter}
+          onChange={({ target }) => setFilter((target as HTMLInputElement).value)}
+        />
+      </div>
       <div className="questions-list">
         <div className="questions-list__header">
           <QuestionsFilter
             filter={badgeFilter}
             onChange={(value) => setBadgeFilter(prev => prev === value ? 'all' : value)}
           />
-          <span>Кол-во</span>
+          <span className="questions-list__count">Кол-во</span>
         </div>
         <QuestionsList
           selected={selected}

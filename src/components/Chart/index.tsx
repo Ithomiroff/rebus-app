@@ -41,12 +41,18 @@ const ChartLine = () => {
           },
           scales: {
             x: {
+              grid: {
+                color: 'rgba(73, 73, 73, 0.5)',
+              },
               display: true,
               title: {
                 display: true
               }
             },
             y: {
+              grid: {
+                color: 'rgba(73, 73, 73, 0.5)',
+              },
               display: true,
               title: {
                 display: true,
