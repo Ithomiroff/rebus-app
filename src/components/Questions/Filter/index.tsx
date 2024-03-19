@@ -71,10 +71,8 @@ const QuestionsFilter = ({ filter, onChange }: Props) => {
             <li className="filter-dd-variants__item">
               <div
                 className="form-group"
-                onClick={() => onChange('hidden')}
               >
                 <input
-                  checked={filter === 'hidden'}
                   type="checkbox" />
                 <label className="filter-dd-variants__item__label">
                   <span className="text">Скрытые (83)</span>

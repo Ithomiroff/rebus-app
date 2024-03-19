@@ -44,7 +44,7 @@ const QuestionsList = ({ list, substring, selected, onToggle }: Props) => {
       <ul className="q-list">
         {list.map((item) => (
           <li
-            className={`q-list__item ${item.badge === 'hidden' && 'q-list__item--hidden'}`}
+            className={`q-list__item ${item.isHidden && 'q-list__item--hidden'}`}
             key={item.id}
           >
             <div className="q-list__item__icon">

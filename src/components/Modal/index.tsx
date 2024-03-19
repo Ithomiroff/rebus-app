@@ -1,9 +1,9 @@
 import { PropsWithChildren, useCallback, useEffect, useRef } from "react";
 import './modal.scss';
 
-type Props = PropsWithChildren<{ onClose?: () => void }>
+type Props = PropsWithChildren<{ onClose?: () => void; closeOutClick?: boolean }>
 
-const Modal = ({ children, onClose }: Props) => {
+const Modal = ({ children, onClose, closeOutClick = true }: Props) => {
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -21,11 +21,13 @@ const Modal = ({ children, onClose }: Props) => {
   }, []);
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      document.addEventListener('click', handler);
-    })
+    if (closeOutClick) {
+      requestAnimationFrame(() => {
+        document.addEventListener('click', handler);
+      })
+    }
     return () => document.removeEventListener('click', handler);
-  }, []);
+  }, [closeOutClick]);
 
   return (
     <div className="modal">

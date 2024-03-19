@@ -5,6 +5,7 @@ import QuestionsContainer from "./components/Questions/Container";
 import { Questions } from "./config/types";
 import { LIST_MOCK } from "./config/Mocks";
 
+
 const App = () => {
 
   const [data, setData] = useState<Questions[]>(LIST_MOCK);
@@ -19,6 +20,7 @@ const App = () => {
        <ChartLine/>
        <QuestionsContainer
          list={data}
+         onChange={setData}
        />
      </main>
    </>

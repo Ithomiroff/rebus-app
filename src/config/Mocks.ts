@@ -1,4 +1,4 @@
-import { FilterVariant, Questions } from "./types";
+import { FilterVariant, Mark, Questions, SelectOption } from "./types";
 
 const FILTER_VARIANTS: FilterVariant[] = [
   {
@@ -44,7 +44,8 @@ const LIST_MOCK: Questions[] = [
     id: 2,
     label: 'Почему не начислены бонусы в день рождения?',
     count: 240,
-    badge: 'hidden',
+    badge: 'marketing',
+    isHidden: true,
   },
   {
     id: 3,
@@ -69,6 +70,7 @@ const LIST_MOCK: Questions[] = [
     label: 'Прошла оплата моего заказа?',
     count: 110,
     badge: 'call',
+    isHidden: true,
   },
   {
     id: 7,
@@ -85,7 +87,24 @@ const LIST_MOCK: Questions[] = [
 
 ];
 
+const MARKS: SelectOption[] = [
+  {
+    value: 'logists',
+    label: 'Логисты'
+  },
+  {
+    value: 'marketing',
+    label: 'Маркетинг'
+  },
+  {
+    value: 'call',
+    label: 'Колл-центр'
+  }
+
+];
+
 export {
+  MARKS,
   LIST_MOCK,
   FILTER_VARIANTS,
 };

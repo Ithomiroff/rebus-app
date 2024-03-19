@@ -1,14 +1,25 @@
 import QuestionsList from "../List";
 import QuestionsFilter from "../Filter";
 import QuestionsActionsPanel from "../ActionsPanel";
-import { QuestionBadge, Questions } from "../../../config/types";
-import { useMemo, useState } from "react";
+import { QuestionBadge, QuestionMarks, Questions } from "../../../config/types";
+import React, { SyntheticEvent, useMemo, useState } from "react";
+import Modal from "../../Modal";
+import RebusSelect from "../../RebusSelect";
+import AddMarksModal from "../AddMarksModal";
+import MarksManageModal from "../AddMarksModal";
 
-const QuestionsContainer = ({ list }: { list: Questions[] }) => {
+type Props = {
+  list: Questions[];
+  onChange: (list: Questions[]) => void;
+};
+
+const QuestionsContainer = ({ list, onChange }: Props) => {
 
   const [filter, setFilter] = useState<string>('');
   const [selected, setSelected] = useState<Questions[]>([]);
   const [badgeFilter, setBadgeFilter] = useState<QuestionBadge>('all');
+  const [unionName, setUnionName] = useState<string | null>(null);
+  const [markManageModal, setMarkManageModal] = useState<'add' | 'remove' | null>(null);
 
   const filtered = useMemo(() => {
     const result = badgeFilter === 'all' ? list : list.filter((item) => item.badge === badgeFilter);
@@ -25,6 +36,66 @@ const QuestionsContainer = ({ list }: { list: Questions[] }) => {
     } else {
       setSelected((prev) => ([...prev, item]));
     }
+  };
+
+  const onHide = () => {
+    const result = list.map((item) => {
+      if (selected.find(sel => sel.id === item.id)) {
+        item.isHidden = true;
+      }
+      return item;
+    });
+    onChange(result);
+    setSelected([]);
+  };
+
+  const onShow = () => {
+    const result = list.map((item) => {
+      if (selected.find(sel => sel.id === item.id)) {
+        item.isHidden = false;
+      }
+      return item;
+    });
+    onChange(result);
+    setSelected([]);
+  };
+
+  const handleUnion = (event: SyntheticEvent) => {
+    event.preventDefault();
+
+    const result: Questions[] = [];
+
+    list.forEach((item) => {
+      const forUnion = selected.some((sel) => sel.id === item.id);
+
+      if (!forUnion) {
+        result.push(item);
+      }
+    });
+
+    result.push({
+      id: +new Date(),
+      label: unionName || '',
+      badge: null,
+      count: selected.reduce((acc, value) => acc + value.count, 0)
+    });
+    onChange(result);
+    setSelected([]);
+    setUnionName(null);
+  };
+
+  const handleSaveAddRemove = (questions: Questions[]) => {
+    const result = list.map((item) => {
+      const forUpdate = questions.find((sel) => sel.id === item.id);
+
+      if (forUpdate) {
+        return forUpdate;
+      }
+      return item;
+    });
+    onChange(result);
+    setSelected([]);
+    setMarkManageModal(null);
   };
 
   return (
@@ -52,8 +123,56 @@ const QuestionsContainer = ({ list }: { list: Questions[] }) => {
       </div>
       {selected.length > 0 && (
         <QuestionsActionsPanel
-          items={selected}
           onClose={() => setSelected([])}
+          onHide={onHide}
+          onShow={onShow}
+          onUnion={() => setUnionName('')}
+          onAdd={() => setMarkManageModal('add')}
+          onRemove={() => setMarkManageModal('remove')}
+        />
+      )}
+      {unionName !== null && (
+        <Modal
+          onClose={() => setUnionName(null)}
+        >
+          <form
+            className="modal-inner"
+            onSubmit={handleUnion}
+          >
+            <div className="modal-title">Название после объединения</div>
+            <div className="modal-content">
+              <input
+                type="text"
+                onChange={({ target }) => setUnionName(target.value)}
+              />
+            </div>
+            <div className="modal-actions">
+              <button
+                data-secondary="true"
+                onClick={() => setUnionName(null)}
+              >Отменить</button>
+              <button
+                data-accent="true"
+                type="submit"
+              >Сохранить</button>
+            </div>
+          </form>
+        </Modal>
+      )}
+      {markManageModal === 'add' && (
+        <MarksManageModal
+          mode="add"
+          selected={selected}
+          onClose={() => setMarkManageModal(null)}
+          onSave={handleSaveAddRemove}
+        />
+      )}
+      {markManageModal === 'remove' && (
+        <MarksManageModal
+          mode="remove"
+          selected={selected}
+          onClose={() => setMarkManageModal(null)}
+          onSave={handleSaveAddRemove}
         />
       )}
     </div>
