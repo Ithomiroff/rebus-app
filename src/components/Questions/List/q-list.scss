@@ -23,6 +23,9 @@
       cursor: pointer;
       margin-right: 17px;
       visibility: hidden;
+      &--selected {
+        visibility: visible;
+      }
     }
     &__count {
       flex: 2 1;

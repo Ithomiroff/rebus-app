@@ -9,10 +9,12 @@ import { FILTER_VARIANTS } from "../../../config/Mocks";
 
 type Props = {
   list: Questions[];
+  questionsChart: Questions[];
   onChange: (list: Questions[]) => void;
+  onSelectChart: (item: Questions) => void;
 };
 
-const QuestionsContainer = ({ list, onChange }: Props) => {
+const QuestionsContainer = ({ list, questionsChart, onChange, onSelectChart }: Props) => {
 
   const [filter, setFilter] = useState<string>('');
   const [selected, setSelected] = useState<Questions[]>([]);
@@ -143,10 +145,12 @@ const QuestionsContainer = ({ list, onChange }: Props) => {
         </div>
         <QuestionsList
           hiddenActive={badgeFilter.some((item) => item.type === 'hidden')}
+          questionsChart={questionsChart}
           selected={selected}
           substring={filter}
           list={filtered}
           onToggle={handleToggle}
+          onSelectChart={onSelectChart}
         />
       </div>
       {selected.length > 0 && (

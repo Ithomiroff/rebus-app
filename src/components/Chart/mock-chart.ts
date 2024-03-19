@@ -11,14 +11,12 @@ const getMocks = () => {
       {
         label: 'Когда доставят заказ?',
         data: datapoints,
-        borderColor: '#2098FF',
         fill: false,
         tension: 0.4,
         cubicInterpolationMode: 'monotone',
       }, {
         label: 'Почему не начислены бонусы в день рождения?',
         data: datapoints,
-        borderColor: '#F8CC3D',
         fill: false,
         tension: 0.4,
       },

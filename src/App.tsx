@@ -9,6 +9,17 @@ import { LIST_MOCK } from "./config/Mocks";
 const App = () => {
 
   const [data, setData] = useState<Questions[]>(LIST_MOCK);
+  const [chartQuestions, setChartQuestions] = useState<Questions[]>([]);
+
+  const handleSelectChart = (item: Questions) => {
+    setChartQuestions((prev) => {
+      if (prev.some((val) => val.id === item.id)) {
+        return prev.filter((val) => val.id !== item.id);
+      } else {
+        return [...prev, item];
+      }
+    });
+  };
 
   return (
    <>
@@ -17,10 +28,12 @@ const App = () => {
      </header>
      <main className="main">
        <Picker/>
-       <ChartLine/>
+       <ChartLine questions={chartQuestions}/>
        <QuestionsContainer
          list={data}
          onChange={setData}
+         questionsChart={chartQuestions}
+         onSelectChart={handleSelectChart}
        />
      </main>
    </>
