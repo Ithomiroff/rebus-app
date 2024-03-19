@@ -1,10 +1,11 @@
 import QuestionsList from "../List";
 import QuestionsFilter from "../Filter";
 import QuestionsActionsPanel from "../ActionsPanel";
-import { QuestionBadge, QuestionMarks, Questions } from "../../../config/types";
+import { Questions, QuestionsFilterItem } from "../../../config/types";
 import React, { SyntheticEvent, useMemo, useState } from "react";
 import Modal from "../../Modal";
 import MarksManageModal from "../AddMarksModal";
+import { FILTER_VARIANTS } from "../../../config/Mocks";
 
 type Props = {
   list: Questions[];
@@ -15,20 +16,36 @@ const QuestionsContainer = ({ list, onChange }: Props) => {
 
   const [filter, setFilter] = useState<string>('');
   const [selected, setSelected] = useState<Questions[]>([]);
-  const [badgeFilter, setBadgeFilter] = useState<QuestionBadge>('all');
+
+  const [badgeFilter, setBadgeFilter] = useState<QuestionsFilterItem[]>(FILTER_VARIANTS);
+
   const [unionName, setUnionName] = useState<string | null>(null);
   const [markManageModal, setMarkManageModal] = useState<'add' | 'remove' | null>(null);
 
   const filtered = useMemo(() => {
-    const result = badgeFilter === 'all' ? list : list.filter((item) => {
-      if (badgeFilter === 'hidden') {
-        return item.isHidden;
-      }
-      if(badgeFilter === null) {
-        return item.marks.length === 0;
-      }
-      return item.marks?.includes(badgeFilter as QuestionMarks);
-    });
+    if (badgeFilter.length === 0) {
+      return [];
+    }
+
+    const isAll = badgeFilter.some((item) => item.type === 'all');
+
+    let result = list;
+
+    if (!isAll) {
+      badgeFilter.forEach((filter) => {
+        if (filter.type === 'hidden') {
+          result = result.filter((item) => item.isHidden);
+        }
+        if (filter.type === null) {
+          const filtered = result.filter((item) => item.marks.length === 0);
+          result = filtered.length > 0 ? filtered : result;
+        }
+        if (filter.type === 'marks' && filter.markType) {
+          const filtered = result.filter((item) => filter.markType && item.marks.includes(filter.markType));
+          result = filtered.length > 0 ? filtered : result;
+        }
+      });
+    }
 
     if (filter.length > 1) {
       return result.filter(item => item.label.toLowerCase().indexOf(filter.toLowerCase()) >= 0);
@@ -120,11 +137,12 @@ const QuestionsContainer = ({ list, onChange }: Props) => {
         <div className="questions-list__header">
           <QuestionsFilter
             filter={badgeFilter}
-            onChange={(value) => setBadgeFilter(prev => prev === value ? 'all' : value)}
+            onChange={setBadgeFilter}
           />
           <span className="questions-list__count">Кол-во</span>
         </div>
         <QuestionsList
+          hiddenActive={badgeFilter.some((item) => item.type === 'hidden')}
           selected={selected}
           substring={filter}
           list={filtered}

@@ -34,7 +34,6 @@ const MarksManageModal = ({ mode, selected, onClose, onSave }: Props) => {
 
   return (
     <Modal
-      closeOutClick={false}
       onClose={onClose}
     >
       <form

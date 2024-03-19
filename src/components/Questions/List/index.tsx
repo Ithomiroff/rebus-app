@@ -6,11 +6,12 @@ import Modal from "../../Modal";
 type Props = {
   list: Questions[];
   selected: Questions[];
+  hiddenActive: boolean;
   substring: string;
   onToggle: (item: Questions) => void;
 };
 
-const QuestionsList = ({ list, substring, selected, onToggle }: Props) => {
+const QuestionsList = ({ list, substring, selected, hiddenActive, onToggle }: Props) => {
 
   const [detail, setDetail] = useState<boolean>(false);
 
@@ -44,7 +45,7 @@ const QuestionsList = ({ list, substring, selected, onToggle }: Props) => {
       <ul className="q-list">
         {list.map((item) => (
           <li
-            className={`q-list__item ${item.isHidden && 'q-list__item--hidden'}`}
+            className={`q-list__item ${hiddenActive && item.isHidden && 'q-list__item--hidden'}`}
             key={item.id}
           >
             <div className="q-list__item__icon">

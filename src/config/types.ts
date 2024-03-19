@@ -13,6 +13,14 @@ type Mark = {
   label: string;
 };
 
+type QuestionsFilterItem = {
+  id: number;
+  label: string;
+  count: number;
+  type: 'marks' | 'all' | null | 'hidden';
+  markType?: QuestionMarks;
+}
+
 type QuestionMarks = 'marketing' | 'logists' | 'call';
 
 type QuestionBadge = 'marketing' | 'logists' | 'call' | null | 'all' | 'hidden';
@@ -38,4 +46,5 @@ export type {
   QuestionMarks,
   Mark,
   SelectOption,
+  QuestionsFilterItem,
 };

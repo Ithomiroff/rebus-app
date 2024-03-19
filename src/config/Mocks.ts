@@ -1,6 +1,6 @@
-import { FilterVariant, Mark, Questions, SelectOption } from "./types";
+import { Questions, QuestionsFilterItem, SelectOption } from "./types";
 
-const FILTER_VARIANTS: FilterVariant[] = [
+const FILTER_VARIANTS: QuestionsFilterItem[] = [
   {
     id: 0,
     count: 833,
@@ -17,22 +17,25 @@ const FILTER_VARIANTS: FilterVariant[] = [
     id: 2,
     count: 109,
     label: 'Маркетинг',
-    type: 'marketing',
+    type: 'marks',
+    markType: 'marketing',
   },
   {
     id: 3,
     count: 30,
     label: 'Логисты',
-    type: 'logists',
+    type: 'marks',
+    markType: 'logists',
   },
   {
     id: 4,
     count: 3,
     label: 'Колл-центр',
-    type: 'call',
+    type: 'marks',
+    markType: 'call'
   },
   {
-    id: 4,
+    id: 5,
     count: 11,
     label: 'Скрытые',
     type: 'hidden',

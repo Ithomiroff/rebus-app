@@ -9,8 +9,10 @@ const Modal = ({ children, onClose, closeOutClick = true }: Props) => {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    document.body.style.marginRight = '8px';
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.style.marginRight = '0';
     };
   }, []);
 
@@ -32,7 +34,9 @@ const Modal = ({ children, onClose, closeOutClick = true }: Props) => {
   return (
     <div className="modal">
       <div className="modal-card" ref={ref}>
-        {children}
+        <div className="modal-card-inner">
+          {children}
+        </div>
       </div>
     </div>
   )
