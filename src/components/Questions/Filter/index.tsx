@@ -50,7 +50,7 @@ const QuestionsFilter = ({ filter, onChange }: Props) => {
         <div className="filter-dd" ref={ref}>
           <span className="filter-dd__title">Метки</span>
           <ul className="filter-dd-variants">
-            {FILTER_VARIANTS.map((item) => (
+            {FILTER_VARIANTS.filter((item) => item.type !== 'hidden').map((item) => (
               <li className="filter-dd-variants__item">
                 <div
                   className="form-group"
@@ -71,8 +71,10 @@ const QuestionsFilter = ({ filter, onChange }: Props) => {
             <li className="filter-dd-variants__item">
               <div
                 className="form-group"
+                onClick={() => onChange('hidden')}
               >
                 <input
+                  checked={filter === 'hidden'}
                   type="checkbox" />
                 <label className="filter-dd-variants__item__label">
                   <span className="text">Скрытые (83)</span>

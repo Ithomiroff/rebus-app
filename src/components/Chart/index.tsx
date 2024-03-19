@@ -3,6 +3,7 @@ import { CategoryScale, Chart, Legend, LinearScale, LineElement, PointElement, T
 
 import { Chart as ChartJS } from 'chart.js/auto';
 import { getMocks } from "./mock-chart";
+import './chart.scss';
 
 ChartJS.register(
   CategoryScale,
@@ -24,9 +25,15 @@ const ChartLine = () => {
         options: {
           responsive: true,
           plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                usePointStyle: true,
+                pointStyle: 'circle',
+              }
+            },
             title: {
-              display: true,
-              text: 'Chart.js Line Chart - Cubic interpolation mode'
+              display: false,
             },
           },
           interaction: {

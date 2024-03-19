@@ -4,7 +4,7 @@ type Questions = {
   label: string;
   badge: QuestionBadge;
   isHidden?: boolean;
-  marks?: QuestionMarks[];
+  marks: QuestionMarks[];
 };
 
 type Mark = {
@@ -15,7 +15,7 @@ type Mark = {
 
 type QuestionMarks = 'marketing' | 'logists' | 'call';
 
-type QuestionBadge = 'marketing' | 'logists' | 'call' | null | 'all';
+type QuestionBadge = 'marketing' | 'logists' | 'call' | null | 'all' | 'hidden';
 
 
 type FilterVariant = {

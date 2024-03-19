@@ -44,6 +44,7 @@ const MarksManageModal = ({ mode, selected, onClose, onSave }: Props) => {
         <div className="modal-title">{mode === 'add' ? 'Добавить метку' : 'Удалить метку'}</div>
         <div className="modal-content">
           <RebusSelect
+            placeholder="Название метки"
             options={MARKS}
             value={values}
             onChange={setValues}

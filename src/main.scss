@@ -41,6 +41,8 @@ body {
 
   h4 {
     margin: 0;
+    font-size: 25px;
+    font-weight: 700;
   }
 }
 
@@ -62,6 +64,7 @@ button {
   align-items: center;
   gap: 10px;
   font-size: 18px;
+  font-weight: 500;
   &:hover, &:active {
     background-color: var(--dark-gray);
   }
@@ -112,6 +115,10 @@ input[type="text"] {
   outline: none;
   font-size: 18px;
   color: var(--light);
+  &::placeholder {
+    color: #505050;
+    font-weight: 600;
+  }
 }
 
 .questions {
@@ -198,4 +205,10 @@ input[type="text"] {
   height: 1px;
   background-color: var(--dark-gray);
   margin: 15px 0;
+}
+
+.mv-remove-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

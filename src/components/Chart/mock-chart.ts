@@ -9,18 +9,18 @@ const getMocks = () => {
     labels: labels,
     datasets: [
       {
-        label: 'Cubic interpolation (monotone)',
+        label: 'Когда доставят заказ?',
         data: datapoints,
         borderColor: '#2098FF',
         fill: false,
+        tension: 0.4,
         cubicInterpolationMode: 'monotone',
-        tension: 0.4
       }, {
-        label: 'Cubic interpolation',
+        label: 'Почему не начислены бонусы в день рождения?',
         data: datapoints,
         borderColor: '#F8CC3D',
         fill: false,
-        tension: 0.4
+        tension: 0.4,
       },
     ]
   };

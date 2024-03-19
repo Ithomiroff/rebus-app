@@ -4,8 +4,6 @@ import QuestionsActionsPanel from "../ActionsPanel";
 import { QuestionBadge, QuestionMarks, Questions } from "../../../config/types";
 import React, { SyntheticEvent, useMemo, useState } from "react";
 import Modal from "../../Modal";
-import RebusSelect from "../../RebusSelect";
-import AddMarksModal from "../AddMarksModal";
 import MarksManageModal from "../AddMarksModal";
 
 type Props = {
@@ -22,7 +20,15 @@ const QuestionsContainer = ({ list, onChange }: Props) => {
   const [markManageModal, setMarkManageModal] = useState<'add' | 'remove' | null>(null);
 
   const filtered = useMemo(() => {
-    const result = badgeFilter === 'all' ? list : list.filter((item) => item.badge === badgeFilter);
+    const result = badgeFilter === 'all' ? list : list.filter((item) => {
+      if (badgeFilter === 'hidden') {
+        return item.isHidden;
+      }
+      if(badgeFilter === null) {
+        return item.marks.length === 0;
+      }
+      return item.marks?.includes(badgeFilter as QuestionMarks);
+    });
 
     if (filter.length > 1) {
       return result.filter(item => item.label.indexOf(filter) >= 0);
@@ -77,8 +83,10 @@ const QuestionsContainer = ({ list, onChange }: Props) => {
       id: +new Date(),
       label: unionName || '',
       badge: null,
-      count: selected.reduce((acc, value) => acc + value.count, 0)
+      count: selected.reduce((acc, value) => acc + value.count, 0),
+      marks: [],
     });
+
     onChange(result);
     setSelected([]);
     setUnionName(null);

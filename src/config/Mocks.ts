@@ -30,6 +30,12 @@ const FILTER_VARIANTS: FilterVariant[] = [
     count: 3,
     label: 'Колл-центр',
     type: 'call',
+  },
+  {
+    id: 4,
+    count: 11,
+    label: 'Скрытые',
+    type: 'hidden',
   }
 ];
 
@@ -39,6 +45,7 @@ const LIST_MOCK: Questions[] = [
     label: 'Когда доставят заказ?',
     count: 368,
     badge: null,
+    marks: []
   },
   {
     id: 2,
@@ -46,24 +53,28 @@ const LIST_MOCK: Questions[] = [
     count: 240,
     badge: 'marketing',
     isHidden: true,
+    marks: ['marketing']
   },
   {
     id: 3,
     label: 'Прошу отменить заказ',
     count: 200,
     badge: 'logists',
+    marks: ['logists']
   },
   {
     id: 4,
     label: 'Есть ли в наличии матрасы моего размера?',
     count: 143,
     badge: null,
+    marks: []
   },
   {
     id: 5,
     label: 'Когда будет доставлен матрас?',
     count: 115,
     badge: 'call',
+    marks: ['call']
   },
   {
     id: 6,
@@ -71,18 +82,21 @@ const LIST_MOCK: Questions[] = [
     count: 110,
     badge: 'call',
     isHidden: true,
+    marks: ['call']
   },
   {
     id: 7,
     label: 'Как мне списать бонусы для моего заказа?',
     count: 98,
     badge: null,
+    marks: []
   },
   {
     id: 8,
     label: 'Не проходит оплата!',
     count: 81,
     badge: 'marketing',
+    marks: ['marketing']
   },
 
 ];
