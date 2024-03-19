@@ -31,7 +31,7 @@ const QuestionsContainer = ({ list, onChange }: Props) => {
     });
 
     if (filter.length > 1) {
-      return result.filter(item => item.label.indexOf(filter) >= 0);
+      return result.filter(item => item.label.toLowerCase().indexOf(filter.toLowerCase()) >= 0);
     }
     return result;
   }, [list, filter, badgeFilter]);
