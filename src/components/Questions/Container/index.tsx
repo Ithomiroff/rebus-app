@@ -20,40 +20,41 @@ const QuestionsContainer = ({ list, questionsChart, onChange, onSelectChart }: P
   const [selected, setSelected] = useState<Questions[]>([]);
 
   const [badgeFilter, setBadgeFilter] = useState<QuestionsFilterItem[]>(FILTER_VARIANTS);
+  const [hiddenFilter, setHiddenFilter] = useState<boolean>(false);
 
   const [unionName, setUnionName] = useState<string | null>(null);
   const [markManageModal, setMarkManageModal] = useState<'add' | 'remove' | null>(null);
 
   const filtered = useMemo(() => {
-    if (badgeFilter.length === 0) {
-      return [];
-    }
+    const result: Questions[] = [];
+    const addedIds = new Set();
 
-    const isAll = badgeFilter.some((item) => item.type === 'all');
-
-    let result = list;
-
-    if (!isAll) {
+    list.forEach((item) => {
+      if (hiddenFilter) {
+        if (item.isHidden) {
+          result.push(item);
+          addedIds.add(item.id);
+        }
+      }
       badgeFilter.forEach((filter) => {
-        if (filter.type === 'hidden') {
-          result = result.filter((item) => item.isHidden);
-        }
         if (filter.type === null) {
-          const filtered = result.filter((item) => item.marks.length === 0);
-          result = filtered.length > 0 ? filtered : result;
+          if (item.badge === null && !addedIds.has(item.id)) {
+            result.push(item);
+            addedIds.add(item.id);
+          }
         }
-        if (filter.type === 'marks' && filter.markType) {
-          const filtered = result.filter((item) => filter.markType && item.marks.includes(filter.markType));
-          result = filtered.length > 0 ? filtered : result;
+        if (filter.type === 'marks' && filter.markType && item.marks.includes(filter.markType) && !addedIds.has(item.id)) {
+          result.push(item);
+          addedIds.add(item.id);
         }
       });
-    }
+    });
 
     if (filter.length > 1) {
       return result.filter(item => item.label.toLowerCase().indexOf(filter.toLowerCase()) >= 0);
     }
     return result;
-  }, [list, filter, badgeFilter]);
+  }, [list, filter, badgeFilter, hiddenFilter]);
 
   const handleToggle = (item: Questions) => {
     if (selected.find((sel) => sel.id === item.id)) {
@@ -139,12 +140,14 @@ const QuestionsContainer = ({ list, questionsChart, onChange, onSelectChart }: P
         <div className="questions-list__header">
           <QuestionsFilter
             filter={badgeFilter}
+            hiddenFilter={hiddenFilter}
             onChange={setBadgeFilter}
+            onToggleHidden={() => setHiddenFilter(prev => !prev)}
           />
           <span className="questions-list__count">Кол-во</span>
         </div>
         <QuestionsList
-          hiddenActive={badgeFilter.some((item) => item.type === 'hidden')}
+          hiddenActive={hiddenFilter}
           questionsChart={questionsChart}
           selected={selected}
           substring={filter}

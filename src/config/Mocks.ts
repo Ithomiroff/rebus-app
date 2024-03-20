@@ -2,12 +2,6 @@ import { Questions, QuestionsFilterItem, SelectOption } from "./types";
 
 const FILTER_VARIANTS: QuestionsFilterItem[] = [
   {
-    id: 0,
-    count: 833,
-    label: 'Все вопросы',
-    type: 'all',
-  },
-  {
     id: 1,
     count: 790,
     label: 'Без метки',
@@ -33,12 +27,6 @@ const FILTER_VARIANTS: QuestionsFilterItem[] = [
     label: 'Колл-центр',
     type: 'marks',
     markType: 'call'
-  },
-  {
-    id: 5,
-    count: 11,
-    label: 'Скрытые',
-    type: 'hidden',
   }
 ];
 

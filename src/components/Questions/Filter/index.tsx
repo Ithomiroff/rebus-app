@@ -5,12 +5,12 @@ import { QuestionsFilterItem } from "../../../config/types";
 
 type Props = {
   filter: QuestionsFilterItem[];
+  hiddenFilter: boolean;
   onChange: (value: QuestionsFilterItem[]) => void;
+  onToggleHidden: () => void;
 }
 
-const HIDDEN = FILTER_VARIANTS.find((item) => item.type === 'hidden') as QuestionsFilterItem;
-
-const QuestionsFilter = ({ filter, onChange }: Props) => {
+const QuestionsFilter = ({ filter, onChange, hiddenFilter, onToggleHidden }: Props) => {
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -34,18 +34,20 @@ const QuestionsFilter = ({ filter, onChange }: Props) => {
   }, [open]);
 
   const handleChange = (item: QuestionsFilterItem, checked: boolean) => () => {
-    if (item.type === 'all') {
-     if (checked) {
-       onChange(FILTER_VARIANTS);
-     } else {
-       onChange([]);
-     }
+    if (checked) {
+      onChange([...filter, item]);
     } else {
-      if (checked) {
-        onChange([...filter, item]);
-      } else {
-        onChange(filter.filter((fil) => fil.id !== item.id));
-      }
+      onChange(filter.filter((fil) => fil.id !== item.id));
+    }
+  };
+
+  const allChecked = filter.length === FILTER_VARIANTS.length;
+
+  const handleAllChange = () => {
+    if (allChecked) {
+      onChange([]);
+    } else {
+      onChange(FILTER_VARIANTS);
     }
   };
 
@@ -86,8 +88,6 @@ const QuestionsFilter = ({ filter, onChange }: Props) => {
 
   }, [filter]);
 
-  const hiddenActive = filter.some((filItem) => filItem.type === 'hidden');
-
   return (
     <div className="filter">
       <button
@@ -105,7 +105,24 @@ const QuestionsFilter = ({ filter, onChange }: Props) => {
         <div className="filter-dd" ref={ref}>
           <span className="filter-dd__title">Метки</span>
           <ul className="filter-dd-variants">
-            {FILTER_VARIANTS.filter((item) => item.type !== 'hidden').map((item) => {
+            <li className="filter-dd-variants__item">
+              <div
+                className="form-group"
+                onClick={handleAllChange}
+              >
+                <input
+                  checked={allChecked}
+                  type="checkbox"/>
+                <label className="filter-dd-variants__item__label">
+                    <span className="text">
+                      Все вопросы
+                      <span className="text">(833)</span>
+                    </span>
+                </label>
+              </div>
+            </li>
+
+            {FILTER_VARIANTS.map((item) => {
               const checked = filter.some((filItem) => filItem.id === item.id);
               return (
                 <li className="filter-dd-variants__item">
@@ -129,11 +146,13 @@ const QuestionsFilter = ({ filter, onChange }: Props) => {
             <li className="filter-dd-variants__item">
               <div
                 className="form-group"
-                onClick={handleChange(HIDDEN, !hiddenActive)}
+                onClick={onToggleHidden}
               >
                 <input
-                  checked={hiddenActive}
-                  type="checkbox" />
+                  checked={hiddenFilter}
+                  type="checkbox"
+                />
+
                 <label className="filter-dd-variants__item__label">
                   <span className="text">Скрытые (83)</span>
                 </label>
